@@ -93,7 +93,7 @@ or&#x20;
 {% endtabs %}
 
 {% hint style="info" %}
-For custom frameworks please see [custom-framework-integration.md](custom-framework-integration.md "mention")
+For custom frameworks please see [custom-target-integration.md](custom-target-integration.md "mention")
 {% endhint %}
 
 ***
