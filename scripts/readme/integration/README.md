@@ -60,7 +60,7 @@ For custom frameworks please see [custom-framework-integration.md](custom-framew
 
 ## Target
 
-Please proceed based on the framework you use.
+Please proceed based on the target script you use.
 
 {% tabs %}
 {% tab title="qb-target" %}
@@ -100,7 +100,41 @@ For custom frameworks please see [custom-target-integration.md](custom-target-in
 
 ## Inventory
 
+Please proceed based on the target script you use.
 
+{% tabs %}
+{% tab title="qb-target" %}
+Navigate to <kbd>inn-laudry/config/config.lua</kbd> and set <kbd>Config.Target</kbd> to
+
+```lua
+// Config.Target = 'auto'
+```
+
+or&#x20;
+
+```lua
+// Config.Target = 'qb'
+```
+{% endtab %}
+
+{% tab title="ox_target" %}
+Navigate to <kbd>inn-laudry/config/config.lua</kbd> and set <kbd>Config.Target</kbd> to
+
+```lua
+// Config.Target = 'auto'
+```
+
+or&#x20;
+
+```lua
+// Config.Target = 'ox'
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+For custom frameworks please see [custom-target-integration.md](custom-target-integration.md "mention")
+{% endhint %}
 
 ***
 
