@@ -19,6 +19,14 @@ on-screen `[E] interact` prompt, see
 [Custom Text UI Integration](custom-text-ui-integration.md).
 {% endhint %}
 
+{% hint style="info" %}
+Standalone notification resources (not tied to a framework) typically
+expose a direct `exports['your-notify']:FunctionName(...)` call — e.g.
+`exports['your-notify']:Notify(data.description, data.type)`. Framework-tied
+ones like QBCore/ESX below instead put their notify function as a method on
+the framework's own core object.
+{% endhint %}
+
 {% stepper %}
 {% step %}
 ### Open the custom notify template

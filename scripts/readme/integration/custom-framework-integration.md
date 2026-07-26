@@ -15,6 +15,16 @@ API directly — every part of the script only ever calls six functions on a
 Implementing a custom framework means filling in those six functions
 yourself.
 
+{% hint style="info" %}
+Most frameworks expose their functionality via
+`exports['your-framework']:FunctionName(...)` — Qbox (`qbx_core`) works
+exactly this way (see the reference implementation below). Some, like
+QBCore and ESX, instead expose a single "core object" via one export
+(`GetCoreObject()`/`getSharedObject()`) and put everything else as methods
+on that object — check your framework's own docs to see which pattern it
+uses.
+{% endhint %}
+
 {% stepper %}
 {% step %}
 ### Open the custom framework template
@@ -59,10 +69,39 @@ Config.Framework = 'custom'
 
 ## Reference implementation
 
-Every function above is implemented for QBCore in
-`bridge/framework/qb.lua` — it's a useful reference even if your framework
-isn't QBCore-based, since the shape of what each function needs to return
-is identical:
+Every function above is implemented for Qbox in `bridge/framework/qbox.lua`
+— a clean example of the pure-export pattern, since `qbx_core` exposes
+everything as a direct export call with no core object to fetch first:
+
+```lua
+function Framework.GetPlayer(src)
+    return exports.qbx_core:GetPlayer(src)
+end
+
+function Framework.GetIdentifier(src)
+    local Player = exports.qbx_core:GetPlayer(src)
+    return Player and Player.PlayerData.citizenid or nil
+end
+
+function Framework.GetJob(src)
+    local Player = exports.qbx_core:GetPlayer(src)
+    if not Player then return nil end
+
+    return {
+        name = Player.PlayerData.job.name,
+        grade = Player.PlayerData.job.grade.level,
+        isboss = Player.PlayerData.job.isboss or false,
+    }
+end
+
+function Framework.AddMoney(src, amount, reason, moneyType)
+    return exports.qbx_core:AddMoney(src, moneyType or Config.Payout.moneyType, amount, reason or 'inn-laundry')
+end
+```
+
+If your framework instead uses the "one core object" pattern (QBCore and
+ESX both do), fetch it once at the top of your file and call its methods
+from there — `bridge/framework/qb.lua`:
 
 ```lua
 local QBCore = exports['qb-core']:GetCoreObject()
@@ -71,20 +110,11 @@ function Framework.GetPlayer(src)
     return QBCore.Functions.GetPlayer(src)
 end
 
-function Framework.GetIdentifier(src)
+function Framework.AddMoney(src, amount, reason, moneyType)
     local Player = QBCore.Functions.GetPlayer(src)
-    return Player and Player.PlayerData.citizenid or nil
-end
+    if not Player then return false end
 
-function Framework.GetJob(src)
-    local Player = QBCore.Functions.GetPlayer(src)
-    if not Player then return nil end
-
-    return {
-        name = Player.PlayerData.job.name,
-        grade = Player.PlayerData.job.grade.level,
-        isboss = Player.PlayerData.job.isboss or false,
-    }
+    return Player.Functions.AddMoney(moneyType or Config.Payout.moneyType, amount, reason or 'inn-laundry')
 end
 ```
 

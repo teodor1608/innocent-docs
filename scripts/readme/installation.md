@@ -43,13 +43,6 @@ Locate and download&#x20;
 
 ## Download Dependencies
 
-{% hint style="info" %}
-**Framework & inventory** aren't listed below — this script bridges to
-whichever one you already run (QBCore, Qbox, or ESX; ox\_inventory or
-qb-inventory), detected automatically. You don't need to install a new one
-for this script specifically.
-{% endhint %}
-
 {% tabs %}
 {% tab title="Required" %}
 {% hint style="warning" %}
@@ -70,11 +63,8 @@ In-world 3D gizmo used to precisely place a washing machine
 {% endembed %}
 
 {% embed url="https://bzzz.tebex.io/package/7390529" %}
-bzzz\_money — washing machine + supplier NPC bag props and animations. Free
-and open source, but distributed as its own Tebex package rather than
-bundled/escrowed with inn-laundry — install and update it separately, and
-don't rename anything inside it (its prop/animation names are hardcoded
-into inn-laundry's client code).
+bzzz\_money — washing machine + supplier NPC bag props and animations.
+Install and update it separately, and don't rename anything inside it.
 {% endembed %}
 {% endtab %}
 
@@ -122,20 +112,18 @@ Drag the <kbd>inn-laundry</kbd> folder into your server's <kbd>resources</kbd> d
 {% step %}
 ### Upload bzzz\_money
 
-Drag the <kbd>bzzz\_money</kbd> folder into <kbd>resources</kbd> too, and follow its own `readme.txt` — it's a standalone prop pack, not something `inn-laundry` bundles for you.
+Drag the <kbd>bzzz\_money</kbd> folder into <kbd>resources</kbd> too, and follow its own `readme.txt` for setup.
 {% endstep %}
 
 {% step %}
-### Copy the item icon
+### Copy the item icons
 
-`inn-laundry` ships one item icon, <kbd>install/images/inn\_washer.png</kbd>. Copy it into your inventory's image folder:
+Copy the item icons included in <kbd>install/images/</kbd> into your inventory's image folder:
 
 * ox\_inventory → `ox_inventory/web/images/`
 * qb-inventory → `qb-inventory/html/images/`
-
-{% hint style="info" %}
-No other item ships an icon — add your own `<itemname>.png` for the rest (washing liquid, tablet, repair kit, generator, and the twelve upgrade items), or they'll show a placeholder/broken image in your inventory.
-{% endhint %}
+* qs-inventory → `qs-inventory/html/images/`
+* qs-inventory (Advanced) → `qs-inventory/web/dist/images/`
 {% endstep %}
 {% endstepper %}
 
@@ -161,24 +149,26 @@ ensure inn-laundry
 
 ## Items Setup
 
-Item definitions aren't created automatically — inventories don't expose a safe way to do that at runtime — so register them yourself once:
-
 {% tabs %}
 {% tab title="ox_inventory" %}
-Merge `install/items/ox_inventory.lua` into `ox_inventory/data/items.lua`.
+Add the contents of `install/items/ox_inventory.lua` to `ox_inventory/data/items.lua`.
 {% endtab %}
 
 {% tab title="qb-inventory" %}
-Merge `install/items/qb-inventory.lua` into `qb-core/shared/items.lua` (QBCore or Qbox running qb-inventory).
+Add the contents of `install/items/qb-inventory.lua` to `qb-core/shared/items.lua` (QBCore or Qbox running qb-inventory).
+{% endtab %}
+
+{% tab title="qs-inventory" %}
+Add the contents of `install/items/qs-inventory.lua` wherever your qs-inventory version declares items.
 {% endtab %}
 
 {% tab title="Anything else" %}
-Use either file above as a reference for the item names/weights and register them however your inventory expects.
+Use one of the files above as a reference for the item names/weights and add them however your inventory expects.
 {% endtab %}
 {% endtabs %}
 
 {% hint style="warning" %}
-Item names come from `config/items.lua` — if you rename an item there, rename it in your inventory's item table too, or the resource will hand players an item your inventory doesn't recognize.
+If you rename an item in `config/items.lua`, rename it in your inventory's item list too, or the script will hand players an item your inventory doesn't recognize.
 {% endhint %}
 
 ***
@@ -188,7 +178,9 @@ Item names come from `config/items.lua` — if you rename an item there, rename 
 `server/db.lua` runs `CREATE TABLE IF NOT EXISTS` for all five tables the first time the resource starts — you don't need to import anything by hand in the normal case.
 
 {% hint style="info" %}
-If your database user isn't allowed to run `CREATE TABLE` (some shared hosts restrict this), import `install/sql/inn-laundry.sql` once by hand instead — the resource will detect the tables already exist and skip creating them.
+If your database user isn't allowed to run `CREATE TABLE` (some shared hosts restrict this), import `install/sql/inn-laundry.sql` once by hand instead, preferably using HeidiSQL or another manager compatible with MariaDB/MySQL — the resource will detect the tables already exist and skip creating them.
+
+Avoid doing this through XAMPP or other non-optimized local server setups, as they're prone to causing connection errors.
 {% endhint %}
 
 ***

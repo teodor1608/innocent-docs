@@ -20,6 +20,12 @@ notification popups, see
 [Custom Notify Integration](custom-notify-integration.md).
 {% endhint %}
 
+{% hint style="info" %}
+Most text UI resources expose a direct `exports['your-textui']:FunctionName(...)`
+call for showing/hiding the prompt — QBCore's `DrawText`/`HideText` below
+are a good example, called directly with no core object needed first.
+{% endhint %}
+
 {% stepper %}
 {% step %}
 ### Open the custom text UI template

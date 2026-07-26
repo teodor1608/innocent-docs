@@ -15,6 +15,13 @@ functions on a client-side `Target` table, defined once per target system
 under `bridge/target/`.
 
 {% hint style="info" %}
+Target resources are typically integrated purely via
+`exports['your-target']:FunctionName(...)` calls — both ox\_target and
+qb-target work this way (see the reference implementation below), with no
+extra object to fetch first.
+{% endhint %}
+
+{% hint style="info" %}
 A target resource isn't strictly required at all — machines, the supplier
 NPC, the generator, and shell entry/exit each have their own `useTarget`
 config toggle. Set them all to `false` and you can skip this integration

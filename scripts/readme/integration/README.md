@@ -5,10 +5,10 @@ This script is highly customizable and compatible with all major frameworks and 
 Don't use a mainstream framework or script? That's ok, custom integrations are supported too.&#x20;
 
 {% hint style="info" %}
-Every setting below defaults to `'auto'`, which detects what's running on
-your server via `GetResourceState` — you usually don't need to touch any of
-this at all. Set an explicit value only if you run something non-standard
-or auto-detection picks the wrong one.
+Every setting below defaults to `'auto'`, which automatically figures out
+what you're running — you usually don't need to touch any of this at all.
+Only set it manually if you run something non-standard, or if
+auto-detection picks the wrong one.
 {% endhint %}
 
 ## Framework
@@ -141,6 +141,20 @@ or&#x20;
 
 ```lua
 Config.Inventory = 'ox'
+```
+{% endtab %}
+
+{% tab title="qs-inventory" %}
+Navigate to <kbd>inn-laundry/config/config.lua</kbd> and set <kbd>Config.Inventory</kbd> to
+
+```lua
+-- Config.Inventory = 'auto'
+```
+
+or&#x20;
+
+```lua
+Config.Inventory = 'qs'
 ```
 {% endtab %}
 {% endtabs %}

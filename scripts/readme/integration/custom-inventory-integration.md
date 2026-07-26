@@ -9,16 +9,15 @@ description: >-
 
 ## Custom
 
-Don't run ox\_inventory or qb-inventory? `inn-laundry` never calls an
-inventory's own API directly — every item interaction only ever calls
-eight functions on a server-side `Inventory` table, defined once per
+Don't run ox\_inventory, qb-inventory, or qs-inventory? `inn-laundry` never
+calls an inventory's own API directly — every item interaction only ever
+calls eight functions on a server-side `Inventory` table, defined once per
 inventory under `bridge/inventory/`.
 
 {% hint style="info" %}
-**qs-inventory users start here too, for now.** A dedicated bridge isn't
-shipped yet — it's planned for a future update. In the meantime,
-qs-inventory was historically qb-core-compatible, so `bridge/inventory/qb.lua`
-(see the reference implementation below) is a solid starting point.
+**qs-inventory (and qs-advancedinventory) are supported directly** — see
+[Integration](./) and set `Config.Inventory = 'qs'`. You only need this
+page if you run something else entirely.
 {% endhint %}
 
 {% hint style="info" %}
@@ -88,33 +87,33 @@ metadata table, an `info` table, or similar).
 
 ## Reference implementation
 
-Every function above is implemented for qb-inventory in
-`bridge/inventory/qb.lua`. The marked bills functions are the most
-involved part — they sum a metadata field across every matching stack,
-then remove just enough stacks to cover the requested amount:
+Every function above is implemented for ox\_inventory in
+`bridge/inventory/ox.lua` — a clean example of the export-only pattern:
+every call is a direct `exports.ox_inventory:FunctionName(src, ...)`, no
+player object to fetch first. The marked bills functions are the most
+involved part — they search for every matching stack, then sum or remove
+just enough to cover the requested amount:
 
 ```lua
-local function getMarkedBillSlots(Player)
-    local slots = {}
+function Inventory.GetItemCount(src, item)
+    return exports.ox_inventory:GetItemCount(src, item)
+end
 
-    for _, item in pairs(Player.PlayerData.items) do
-        if item and item.name == Config.MarkedBills.item then
-            slots[#slots + 1] = item
-        end
-    end
+function Inventory.AddItem(src, item, count, metadata)
+    local success = exports.ox_inventory:AddItem(src, item, count, metadata)
+    return success and true or false
+end
 
-    return slots
+local function getMarkedBillSlots(src)
+    return exports.ox_inventory:Search(src, 'slots', Config.MarkedBills.item) or {}
 end
 
 function Inventory.GetMarkedBillsWorth(src)
-    local Player = QBCore.Functions.GetPlayer(src)
-    if not Player then return 0 end
-
     local key = Config.MarkedBills.metadataKey
     local total = 0
 
-    for _, item in ipairs(getMarkedBillSlots(Player)) do
-        local worth = item.info and item.info[key]
+    for _, slot in pairs(getMarkedBillSlots(src)) do
+        local worth = slot.metadata and slot.metadata[key]
         if worth then total = total + worth end
     end
 
@@ -122,19 +121,17 @@ function Inventory.GetMarkedBillsWorth(src)
 end
 
 function Inventory.RemoveMarkedBills(src, worth)
-    local Player = QBCore.Functions.GetPlayer(src)
-    if not Player then return false end
-
     local key = Config.MarkedBills.metadataKey
+    local slots = getMarkedBillSlots(src)
     local remaining = worth
     local consumed = {}
 
-    for _, item in ipairs(getMarkedBillSlots(Player)) do
+    for _, slot in pairs(slots) do
         if remaining <= 0 then break end
 
-        local slotWorth = item.info and item.info[key] or 0
+        local slotWorth = slot.metadata and slot.metadata[key] or 0
         if slotWorth > 0 then
-            consumed[#consumed + 1] = item
+            consumed[#consumed + 1] = slot
             remaining = remaining - slotWorth
         end
     end
@@ -143,8 +140,8 @@ function Inventory.RemoveMarkedBills(src, worth)
         return false -- player doesn't hold enough marked bills to cover this amount
     end
 
-    for _, item in ipairs(consumed) do
-        exports['qb-inventory']:RemoveItem(src, Config.MarkedBills.item, item.amount or 1, item.slot)
+    for _, slot in ipairs(consumed) do
+        exports.ox_inventory:RemoveItem(src, Config.MarkedBills.item, slot.count, slot.metadata, slot.slot)
     end
 
     return true
@@ -158,12 +155,15 @@ partially consume stacks and then fail, or the player loses bills without
 getting paid for them.
 {% endhint %}
 
-qb-inventory's own item metadata is immutable per-instance, so
+Some inventories instead tie items to a player object fetched through the
+framework, rather than taking a source id on every call — qb-inventory
+works this way, and its own item metadata is immutable per-instance, so
 `SetItemMetadata` there is a remove-then-re-add at the same slot with the
-new metadata table — the same pattern qb-fuel itself uses to persist a
-jerry can's fuel level:
+new metadata table (`bridge/inventory/qb.lua`):
 
 ```lua
+local QBCore = exports['qb-core']:GetCoreObject()
+
 function Inventory.SetItemMetadata(src, item, slot, metadata)
     if not exports['qb-inventory']:RemoveItem(src, item, 1, slot) then return false end
 
@@ -173,5 +173,6 @@ end
 ```
 
 Adapt that same remove-then-re-add pattern if your inventory also treats
-metadata as immutable; if it exposes a direct metadata-update call instead,
-use that.
+metadata as immutable; if it exposes a direct metadata-update export
+instead (like ox\_inventory's `SetMetadata` and qs-inventory's
+`SetItemMetadata` do), use that directly.
