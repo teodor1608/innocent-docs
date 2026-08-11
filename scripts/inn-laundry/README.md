@@ -2,6 +2,7 @@
 description: >-
   A complete money-laundering resource for FiveM - washing machines, marked
   bills, admin-managed laundry zones, and police raids.
+coverY: 0
 ---
 
 # inn-laundry
