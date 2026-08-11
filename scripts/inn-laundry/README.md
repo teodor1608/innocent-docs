@@ -9,6 +9,8 @@ coverY: 0
 
 Players buy laundering supplies from a roaming supplier NPC, place washing machines inside admin-defined laundry zones, and wash marked/dirty bills into clean cash over time. Abnormal electricity usage alerts police, who can raid a zone and confiscate equipment. Admins create and manage laundry zones entirely in-game, with an optional private "shell" interior per zone.
 
+<figure><img src="../../.gitbook/assets/letters-cropped-1500-compressed.png" alt=""><figcaption></figcaption></figure>
+
 Every server-authoritative rule (wash progress, electricity draw, access checks, purchases) is computed and enforced server-side from timestamps and database state — nothing about a wash cycle's outcome is ever trusted from the client.
 
 ## Features
