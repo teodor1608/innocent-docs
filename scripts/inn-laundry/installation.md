@@ -7,6 +7,8 @@ description: >-
 
 # Installation
 
+​[https://scripts.innocent-rp.store/packages/7579771](https://scripts.innocent-rp.store/packages/7579771)​
+
 ## Download Script
 
 To download the assets of the script which you've purchased from INNOCENT RP you must follow the steps below. Asset delivery is handled by Tabex and Cfx.re in the Cfx.re Portal aka Keymaster.
@@ -33,9 +35,9 @@ If you can't find the asset please make sure you used the correct Cfx.re account
 {% step %}
 ### Download the script
 
-Locate and download&#x20;
+Locate and download
 
-* <kbd><mark style="color:$primary;">inn-laundry</mark></kbd>
+* <kbd><mark style="color:$primary;">inn-laundry<mark style="color:$primary;"></kbd>
 {% endstep %}
 {% endstepper %}
 
@@ -46,8 +48,7 @@ Locate and download&#x20;
 {% tabs %}
 {% tab title="Required" %}
 {% hint style="warning" %}
-It is essential that you install all of the dependencies below, in addition
-to the framework/inventory you already run.
+It is essential that you install all of the dependencies below, in addition to the framework/inventory you already run.
 {% endhint %}
 
 {% embed url="https://github.com/overextended/oxmysql" %}
@@ -63,32 +64,20 @@ In-world 3D gizmo used to precisely place a washing machine
 {% endembed %}
 
 {% embed url="https://bzzz.tebex.io/package/7390529" %}
-bzzz\_money — washing machine + supplier NPC bag props and animations.
-Install and update it separately, and don't rename anything inside it.
+bzzz\_money — washing machine + supplier NPC bag props and animations. Install and update it separately, and don't rename anything inside it.
 {% endembed %}
 {% endtab %}
 
 {% tab title="Optional" %}
 {% hint style="info" %}
-The dependencies below are not required for the core features of the script
-to function and are interchangeable for other assets of your liking.
+The dependencies below are not required for the core features of the script to function and are interchangeable for other assets of your liking.
 {% endhint %}
 
-**Target** (`ox_target` or `qb-target`) — recommended, but every
-interaction (machines, the supplier NPC, the generator, shell
-entry/exit) can fall back to a simple `[E]`-prompt instead via each
-feature's `useTarget` config toggle, so a target resource isn't strictly
-required.
+**Target** (`ox_target` or `qb-target`) — recommended, but every interaction (machines, the supplier NPC, the generator, shell entry/exit) can fall back to a simple `[E]`-prompt instead via each feature's `useTarget` config toggle, so a target resource isn't strictly required.
 
-**Dispatch** (`ps-dispatch` or `cd_dispatch`) — if neither is installed,
-police raid alerts fall back to this script's own built-in notification
-to online police, so no third-party dispatch resource is required either.
+**Dispatch** (`ps-dispatch` or `cd_dispatch`) — if neither is installed, police raid alerts fall back to this script's own built-in notification to online police, so no third-party dispatch resource is required either.
 
-**qb-interiors** — only needed if you want the default shell interior
-option (`shell_warehouse1`, the free shell from
-[k4mb1's shell pack](https://k4mb1maps.com/product/5015840)) to resolve
-in-game. Skip this if you clear `Config.Shells.options` or only add your
-own shell pack entries.
+**qb-interiors** — only needed if you want the default shell interior option (`shell_warehouse1`, the free shell from [k4mb1's shell pack](https://k4mb1maps.com/product/5015840)) to resolve in-game. Skip this if you clear `Config.Shells.options` or only add your own shell pack entries.
 {% endtab %}
 {% endtabs %}
 
@@ -194,4 +183,3 @@ Starting the script or the server is not recommended before you have completed [
 {% hint style="info" %}
 If any of the steps or instructions in this guide are incompatible with your infrastructure please request [support.md](../../innocent-rp/support.md "mention").
 {% endhint %}
-
