@@ -7,6 +7,8 @@ coverY: 0
 
 # inn-laundry
 
+[https://scripts.innocent-rp.store/packages/7579771](https://scripts.innocent-rp.store/packages/7579771)
+
 Players buy laundering supplies from a roaming supplier NPC, place washing machines inside admin-defined laundry zones, and wash marked/dirty bills into clean cash over time. Abnormal electricity usage alerts police, who can raid a zone and confiscate equipment. Admins create and manage laundry zones entirely in-game, with an optional private "shell" interior per zone.
 
 Every server-authoritative rule (wash progress, electricity draw, access checks, purchases) is computed and enforced server-side from timestamps and database state — nothing about a wash cycle's outcome is ever trusted from the client.
