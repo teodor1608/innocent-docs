@@ -2,6 +2,7 @@
 description: >-
   A complete money-laundering resource for FiveM - washing machines, marked
   bills, admin-managed laundry zones, and police raids.
+cover: ../../.gitbook/assets/innocent-rp-fivem-scripts-money-wash-creator.webp
 coverY: 0
 ---
 
