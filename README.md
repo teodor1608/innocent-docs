@@ -1,5 +1,5 @@
 ---
-cover: .gitbook/assets/letters-cropped-1500-compressed.png
+cover: .gitbook/assets/innocent-rp-fivem-scripts-money-wash-creator.webp
 coverY: 0
 layout:
   width: default
