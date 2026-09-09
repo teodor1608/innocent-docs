@@ -16,3 +16,4 @@
     * [Интеграция на Собствен Диспечър](scripts/7579771/integration/custom-dispatch-integration.md)
     * [Интеграция на Собствени Известия](scripts/7579771/integration/custom-notify-integration.md)
     * [Интеграция на Собствен Текст UI](scripts/7579771/integration/custom-text-ui-integration.md)
+  * [Промени](scripts/7579771/changelog.md)
