@@ -7,6 +7,8 @@
 
 ## Скриптове <a href="#scripts" id="scripts"></a>
 
+* [Създател на Статистика и Постижения](scripts/7661036/README.md)
+  * [Промени](scripts/7661036/changelog.md)
 * [Създател на Пране на Пари](scripts/7579771/README.md)
   * [Инсталация](scripts/7579771/installation.md)
   * [Интеграция](scripts/7579771/integration/README.md)
