@@ -16,3 +16,4 @@
     * [Custom Dispatch Integration](scripts/7579771/integration/custom-dispatch-integration.md)
     * [Custom Notify Integration](scripts/7579771/integration/custom-notify-integration.md)
     * [Custom Text UI Integration](scripts/7579771/integration/custom-text-ui-integration.md)
+  * [Changelog](scripts/7579771/changelog.md)
