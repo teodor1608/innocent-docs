@@ -1,0 +1,19 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: INNOCENT RP Docs
+  structure:
+    - type: space
+      key: space-1
+      title: Docs
+      path: docs
+      default: true
+      content:
+        directory: ./docs
+        language: en
+    - type: space
+      key: space-2
+      title: Docs BG
+      path: docs-bg
+      content:
+        directory: ./docs-bg
+        language: bg
