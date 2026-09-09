@@ -10,6 +10,7 @@
 * [Създател на Статистика и Постижения](scripts/7661036/README.md)
   * [Промени](scripts/7661036/changelog/README.md)
     * [v0.1.4](scripts/7661036/changelog/v0.1.4.md)
+    * [v0.1.5](scripts/7661036/changelog/v0.1.5.md)
 * [Създател на Пране на Пари](scripts/7579771/README.md)
   * [Инсталация](scripts/7579771/installation.md)
   * [Интеграция](scripts/7579771/integration/README.md)
