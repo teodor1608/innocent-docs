@@ -7,6 +7,8 @@
 
 ## Scripts
 
+* [Stats & Achievements Creator](scripts/7661036/README.md)
+  * [Changelog](scripts/7661036/changelog.md)
 * [Money Wash Creator](scripts/7579771/README.md)
   * [Installation](scripts/7579771/installation.md)
   * [Integration](scripts/7579771/integration/README.md)
