@@ -8,6 +8,7 @@
 ## Скриптове <a href="#scripts" id="scripts"></a>
 
 * [Създател на Статистика и Постижения](scripts/7661036/README.md)
+  * [API за Разработчици](scripts/7661036/developer-api.md)
   * [Промени](scripts/7661036/changelog/README.md)
     * [v0.1.4](scripts/7661036/changelog/v0.1.4.md)
     * [v0.1.5](scripts/7661036/changelog/v0.1.5.md)
