@@ -6,4 +6,4 @@ coverY: 0
 
 # Stats & Achievements Creator
 
-[http://scripts.lvh.me:3000/packages/7661036](http://scripts.lvh.me:3000/en/packages/7661036)
+[https://scripts.innocent-rp.store/packages/7661036](https://scripts.innocent-rp.store/en/packages/7661036)
